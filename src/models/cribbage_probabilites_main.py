@@ -18,22 +18,20 @@ def main():
 def read_cards(filename):
     f=open(filename, 'r')
     lines = f.readlines()
-
-    for line in lines:
-        sline = line.split(',')
-        print(sline)
     f.close()
-    #deal_cards(lines)
+    deal_cards(lines)
 
 def deal_cards(card_list):
-    hands_and_cut = sample(card_list,13)
+    hands_and_cut = sample(card_list,52)
     player1_hand = hands_and_cut[0:6]
     player2_hand = hands_and_cut[6:12]
     cut_card = hands_and_cut[-1]
+    remaining_cards = hands_and_cut[12:-2]
     print('Hands and cut',hands_and_cut)
     print(player1_hand)
     print(player2_hand)
-    print(cut_card[-2])
+    print(cut_card)
+    print(remaining_cards)
     
 if __name__ == '__main__':
    main()
