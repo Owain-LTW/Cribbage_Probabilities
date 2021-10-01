@@ -22,16 +22,14 @@ def read_cards(filename):
     deal_cards(lines)
 
 def deal_cards(card_list):
-    hands_and_cut = sample(card_list,52)
-    player1_hand = hands_and_cut[0:6]
-    player2_hand = hands_and_cut[6:12]
-    cut_card = hands_and_cut[-1]
-    remaining_cards = hands_and_cut[12:-2]
-    print('Hands and cut',hands_and_cut)
-    print(player1_hand)
-    print(player2_hand)
-    print(cut_card)
-    print(remaining_cards)
+    shuffled_deck= sample(card_list,52)
+    player1_hand = shuffled_deck[0:6]
+    player2_hand = shuffled_deck[6:12]
+    remaining_cards = shuffled_deck[12:-1]
+    print('Shuffled deck', shuffled_deck)
+    print('Player 1', player1_hand)
+    print('Player 2', player2_hand)
+    print('Remaining Cards', remaining_cards)
     
 if __name__ == '__main__':
    main()
