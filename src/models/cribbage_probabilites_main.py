@@ -39,8 +39,8 @@ def deal_cards(card_list):
     hand_possibilities(player1_hand)
     
 def hand_possibilities(hand):
-    
-    
+    file_path = '/Users/oltw/Documents/Cribbage_Probabilities/src/data/possible_hands.txt'
+    f=open(file_path,'w')
     for i in range (0,6):
         for j in range (i,6):
             if i == j: continue
@@ -48,5 +48,7 @@ def hand_possibilities(hand):
             dum_hand.remove(hand[i])
             dum_hand.remove(hand[j])
             print('Hand following discarding of 2 cards', dum_hand)
+            f.write(str(dum_hand)+'\n')
+    f.close()
 if __name__ == '__main__':
    main()
