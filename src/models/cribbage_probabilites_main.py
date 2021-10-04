@@ -41,23 +41,38 @@ def deal_cards(card_list):
 def hand_possibilities(hand1, hand2, remaining_cards):
     file_path1 = '/Users/oltw/Documents/Cribbage_Probabilities/src/data/possible_hands1.txt'
     file_path2 = '/Users/oltw/Documents/Cribbage_Probabilities/src/data/possible_hands2.txt'
+    file_path3 = '/Users/oltw/Documents/Cribbage_Probabilities/src/data/possible_cribs.txt'
+    file_path4 = '/Users/oltw/Documents/Cribbage_Probabilities/src/data/remaining_cards.txt'
     f1=open(file_path1,'w')
     f2=open(file_path2,'w')
+    f3=open(file_path3,'w')
+    f4=open(file_path4,'w')
     for i in range (0,6):
         for j in range (i,6):
             if i == j: continue
             dum_hand1 = hand1.copy()
             dum_hand2 = hand2.copy()
+            
             dum_hand1.remove(hand1[i])
             dum_hand1.remove(hand1[j])
+            
             dum_hand2.remove(hand2[i])
             dum_hand2.remove(hand2[j])
-            print('Hand 1 following discarding of 2 cards', dum_hand1)
-            print('Hand 2 following discarding of 2 cards', dum_hand2)
+            
+            crib = hand1[i],hand1[j],hand2[i],hand2[j]
+            crib = list(crib)
+            #print('Hand 1 following discarding of 2 cards', dum_hand1)
+            #print('Hand 2 following discarding of 2 cards', dum_hand2)
             f1.write(str(dum_hand1)+'\n')
-            f2.write(str(dum_hand2)+'\n')            
+            f2.write(str(dum_hand2)+'\n')   
+            f3.write(str(crib)+'\n')
+    
+    f4.write(str(remaining_cards))
+    
     f1.close()
     f2.close()
+    f3.close()
+    f4.close()
     
 if __name__ == '__main__':
    main()
