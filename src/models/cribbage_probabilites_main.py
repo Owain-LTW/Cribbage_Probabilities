@@ -17,15 +17,8 @@ def main():
     script = sys.argv[0]
 
     file_path = '/Users/oltw/Documents/Cribbage_Probabilities/data/raw/french_cards.dat'
-    cards = numpy.loadtxt(file_path,delimiter = ',')
+    cards = numpy.loadtxt(file_path,delimiter = ',', dtype = str)
 
-def read_cards(filename):
-    f=open(filename, 'r')
-    lines = f.readlines()
-    f.close()
-    for card in range (0,52):
-        lines[card]=lines[card].strip()
-    deal_cards(lines)
 
 def deal_cards(card_list):
     shuffled_deck = sample(card_list,52)
