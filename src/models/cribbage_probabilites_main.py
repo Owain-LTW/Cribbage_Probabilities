@@ -16,8 +16,8 @@ from random import sample
 def main():
     script = sys.argv[0]
 
-    file_path = '/Users/oltw/Documents/Cribbage_Probabilities/data/raw/french_cards.txt'
-    read_cards(file_path)
+    file_path = '/Users/oltw/Documents/Cribbage_Probabilities/data/raw/french_cards.dat'
+    cards = numpy.loadtxt(file_path,delimiter = ',')
 
 def read_cards(filename):
     f=open(filename, 'r')
