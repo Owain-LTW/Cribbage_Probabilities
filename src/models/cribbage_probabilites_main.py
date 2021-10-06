@@ -19,28 +19,24 @@ def main():
     file_path = '/Users/oltw/Documents/Cribbage_Probabilities/data/raw/french_cards.dat'
     cards = numpy.loadtxt(file_path,delimiter = ',', dtype = str)
     
-    print(cards)
     deal_cards(cards)
 
 def deal_cards(cards):
-    numpy.random.shuffle(cards)
-    
-    print(cards)
-    
-    player1_hand = shuffled_deck[0:6]
-    player2_hand = shuffled_deck[6:12]
-    remaining_cards = shuffled_deck[12:-1]
-    print('Shuffled deck', shuffled_deck)
+    numpy.random.shuffle(cards)   
+    player1_hand = cards[0:6]
+    player2_hand = cards[6:12]
+    remaining_cards = cards[12:-1]
+    print('Shuffled deck', cards)
     print('Player 1', player1_hand)
     print('Player 2', player2_hand)
     print('Remaining Cards', remaining_cards)
     hand_possibilities(player1_hand, player2_hand, remaining_cards)
     
 def hand_possibilities(hand1, hand2, remaining_cards):
-    file_path1 = '/Users/oltw/Documents/Cribbage_Probabilities/src/data/possible_hands1.txt'
-    file_path2 = '/Users/oltw/Documents/Cribbage_Probabilities/src/data/possible_hands2.txt'
-    file_path3 = '/Users/oltw/Documents/Cribbage_Probabilities/src/data/possible_cribs.txt'
-    file_path4 = '/Users/oltw/Documents/Cribbage_Probabilities/src/data/remaining_cards.txt'
+    file_path1 = '/Users/oltw/Documents/Cribbage_Probabilities/src/data/possible_hands1.dat'
+    file_path2 = '/Users/oltw/Documents/Cribbage_Probabilities/src/data/possible_hands2.dat'
+    file_path3 = '/Users/oltw/Documents/Cribbage_Probabilities/src/data/possible_cribs.dat'
+    file_path4 = '/Users/oltw/Documents/Cribbage_Probabilities/src/data/remaining_cards.dat'
     f1=open(file_path1,'w')
     f2=open(file_path2,'w')
     f3=open(file_path3,'w')
