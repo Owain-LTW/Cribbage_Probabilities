@@ -10,18 +10,23 @@ value (1,2,3,4,5,6,7,8,9,0,J,Q,K). 1 is ace, 0 is 10, J,Q,K are jack, queen, kin
 
 import sys
 import numpy
-from random import seed
 from random import sample
+from random import shuffle
 
 def main():
     script = sys.argv[0]
 
     file_path = '/Users/oltw/Documents/Cribbage_Probabilities/data/raw/french_cards.dat'
     cards = numpy.loadtxt(file_path,delimiter = ',', dtype = str)
+    
+    print(cards)
+    deal_cards(cards)
 
-
-def deal_cards(card_list):
-    shuffled_deck = sample(card_list,52)
+def deal_cards(cards):
+    numpy.random.shuffle(cards)
+    
+    print(cards)
+    
     player1_hand = shuffled_deck[0:6]
     player2_hand = shuffled_deck[6:12]
     remaining_cards = shuffled_deck[12:-1]
