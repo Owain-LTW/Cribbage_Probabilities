@@ -7,15 +7,21 @@ Created on Mon Oct  4 19:13:24 2021
 """
 
 import sys
+import numpy
 from random import sample
 
 def main():
     script = sys.argv[0]
     
-    hand1_path = '/Users/oltw/Documents/Cribbage_Probabilities/src/data/possible_hands1.txt'
-    hand2_path = '/Users/oltw/Documents/Cribbage_Probabilities/src/data/possible_hands2.txt'
-    crib_path = '/Users/oltw/Documents/Cribbage_Probabilities/src/data/possible_cribs.txt'
-    undealt_cards_path = '/Users/oltw/Documents/Cribbage_Probabilities/src/data/remaining_cards.txt'
+    hand1_path = '/Users/oltw/Documents/Cribbage_Probabilities/src/data/possible_hands1.csv'
+    hand2_path = '/Users/oltw/Documents/Cribbage_Probabilities/src/data/possible_hands2.csv'
+    crib_path = '/Users/oltw/Documents/Cribbage_Probabilities/src/data/possible_cribs.csv'
+    undealt_cards_path = '/Users/oltw/Documents/Cribbage_Probabilities/src/data/remaining_cards.csv'
+    
+    hand1 = numpy.loadtxt(hand1_path, dtype = str)
+    hand2 = numpy.loadtxt(hand2_path, dtype = str)
+    crib = numpy.loadtxt(crib_path, dtype = str)
+    deck = numpy.loadtxt(undealt_cards_path, dtype = str)
     
     hand1_possibilities = read_cards(hand1_path)
     hand2_possibilities = read_cards(hand2_path)
@@ -27,7 +33,6 @@ def main():
     print('Crib',crib_possibilities)
     print('UDC',undealt_cards)
     
-    undealt_cards = undealt_cards[0]
     cut_card = sample(undealt_cards,1)
     
     print(cut_card)
