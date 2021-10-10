@@ -23,34 +23,33 @@ def main():
     crib_possibilities = numpy.genfromtxt(crib_path, dtype = str)
     deck = numpy.genfromtxt(undealt_cards_path, dtype = str)
     
-    
     print('Hand 1',hand1_possibilities)
-    print('Hand 2',hand2_possibilities)
-    print('Crib',crib_possibilities)
-    print('UDC',deck)
+    #print('Hand 2',hand2_possibilities)
+    #print('Crib',crib_possibilities)
+    #print('UDC',deck)
     
     cut_card = numpy.random.choice(deck,1)
     
-    print(cut_card)
+    #print(cut_card)
     
     for hand in range (0,len(hand1_possibilities)):
-        print(hand1_possibilities[hand])
         calculate_score(hand1_possibilities[hand], cut_card)
-        
-
 
 def calculate_score(hand, cut_card):
     total_score = calc_15s(hand, cut_card)#+calc_runs(hand)+calc_pairs(hand)+calc_flushes(hand)
     return(total_score)
 
 def calc_15s(hand, cut_card):
-    card_values = [hand[3],hand[9],hand[15],hand[21]]
+    card_values = [hand[0],hand[3],hand[6],hand[9]]
+    #print(card_values)
     #if item in list is J,Q,K,0 then make it 10
-    card_values = list(map(int, card_values))
+
     score = 0
     for i in range(0,len(card_values)):
         if card_values[i] == 'J' or card_values[i] == 'Q' or card_values[i] == 'K':
             card_values[i] = '10'
+            card_values = list(map(int, card_values))
+
         for j in range(0,len(card_values)):
             if j <= i:
                 continue
