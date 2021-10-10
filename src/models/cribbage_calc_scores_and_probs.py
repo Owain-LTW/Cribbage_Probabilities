@@ -39,15 +39,6 @@ def main():
     
     for hand in range (0,len(hand1_possibilities)):
         calculate_score(hand1_possibilities[hand], cut_card)
-    
-  
-def read_cards(filename):
-    f=open(filename, 'r')
-    lines = f.readlines()
-    f.close()
-    for card in range (0,len(lines)):
-        lines[card]=lines[card].strip()
-    return(lines)
 
 
 def calculate_score(hand, cut_card):
