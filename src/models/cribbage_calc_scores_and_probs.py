@@ -8,6 +8,7 @@ Created on Mon Oct  4 19:13:24 2021
 
 import sys
 import numpy
+import re
 from random import sample
 
 def main():
@@ -36,20 +37,26 @@ def main():
         calculate_score(hand1_possibilities[hand], cut_card)
 
 def calculate_score(hand, cut_card):
-    total_score = calc_15s(hand, cut_card)#+calc_runs(hand)+calc_pairs(hand)+calc_flushes(hand)
-    return(total_score)
+    calc_15s(hand, cut_card)
+    calc_runs(hand, cut_card)#+calc_pairs(hand)+calc_flushes(hand)
+    #return(total_score)
 
 def calc_15s(hand, cut_card):
     card_values = [hand[0],hand[3],hand[6],hand[9]]
     #print(card_values)
     #if item in list is J,Q,K,0 then make it 10
+    if card_values[0] == 'J' or card_values[0] == 'Q' or card_values[0] == 'K':
+        card_values[0] = '10'
+    if card_values[1] == 'J' or card_values[1] == 'Q' or card_values[1] == 'K':
+        card_values[1] = '10'
+    if card_values[2] == 'J' or card_values[2] == 'Q' or card_values[2] == 'K':
+        card_values[2] = '10'
+    if card_values[3] == 'J' or card_values[3] == 'Q' or card_values[3] == 'K':
+        card_values[3] = '10'
+    card_values = list(map(int, card_values))
 
     score = 0
     for i in range(0,len(card_values)):
-        if card_values[i] == 'J' or card_values[i] == 'Q' or card_values[i] == 'K':
-            card_values[i] = '10'
-            card_values = list(map(int, card_values))
-
         for j in range(0,len(card_values)):
             if j <= i:
                 continue
@@ -63,7 +70,13 @@ def calc_15s(hand, cut_card):
     if card_values[0] + card_values[1] + card_values[2] + card_values[3] == 15:
         score = score + 2
     
-    print(card_values, score)
+    #print(card_values, score)
+
+def calc_runs(hand, cut_card):
+    if sequence in hand:
+        print(hand, True)
+    else:
+        print(hand, False)
 
 if __name__ == '__main__':
    main()
