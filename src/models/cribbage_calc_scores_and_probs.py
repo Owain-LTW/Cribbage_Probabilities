@@ -31,8 +31,6 @@ def main():
     
     cut_card = numpy.random.choice(deck,1)
     
-    #print(cut_card)
-    
     for hand in range (0,len(hand1_possibilities)):
         calculate_score(hand1_possibilities[hand], cut_card)
 
@@ -43,29 +41,24 @@ def calculate_score(hand, cut_card):
 
 def calc_15s(hand, cut_card):
     card_values = [hand[0],hand[3],hand[6],hand[9]]
-    #print(card_values)
     #if item in list is J,Q,K,0 then make it 10
-    if card_values[0] == 'J' or card_values[0] == 'Q' or card_values[0] == 'K':
+    if card_values[0] == '0' or card_values[0] == 'J' or card_values[0] == 'Q' or card_values[0] == 'K':
         card_values[0] = '10'
-    if card_values[1] == 'J' or card_values[1] == 'Q' or card_values[1] == 'K':
+    if card_values[1] == '0' or card_values[1] == 'J' or card_values[1] == 'Q' or card_values[1] == 'K':
         card_values[1] = '10'
-    if card_values[2] == 'J' or card_values[2] == 'Q' or card_values[2] == 'K':
+    if card_values[2] == '0' or card_values[2] == 'J' or card_values[2] == 'Q' or card_values[2] == 'K':
         card_values[2] = '10'
-    if card_values[3] == 'J' or card_values[3] == 'Q' or card_values[3] == 'K':
+    if card_values[3] == '0' or card_values[3] == 'J' or card_values[3] == 'Q' or card_values[3] == 'K':
         card_values[3] = '10'
     
     card_values = list(map(int, card_values))
     cut_card_value = cut_card[0][0]
-    
-    if cut_card_value == 'J' or cut_card_value == 'Q' or cut_card_value == 'K':
+    print(cut_card_value)
+    if cut_card_value == '0' or cut_card_value == 'J' or cut_card_value == 'Q' or cut_card_value == 'K':
         cut_card_value = '10'
         
     card_values_cut = card_values.copy()
     card_values_cut.append(int(cut_card_value))
-    #add value of cut card to card_values list
-    #put minus 1 on len(card_values)
-    #then for calculation of 15s score with crib, copy code below, but add extra
-    #   loop for 5th card
     
     #score calculation without cut card
     score_no_cut = 0
@@ -83,6 +76,7 @@ def calc_15s(hand, cut_card):
     if card_values[0] + card_values[1] + card_values[2] + card_values[3] == 15:
         score_no_cut = score_no_cut + 2
     
+    #score calculation with cut card
     score_cut = 0
     for i in range(0,len(card_values_cut)):
         for j in range(0,len(card_values_cut)):
@@ -113,9 +107,6 @@ def calc_15s(hand, cut_card):
 
 if __name__ == '__main__':
    main()
-
-
-#def calc_runs:
     
 #def calc_pairs:
     
