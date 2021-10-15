@@ -36,7 +36,7 @@ def main():
 
 def calculate_score(hand, cut_card):
     calc_15s(hand, cut_card)
-    #calc_runs(hand, cut_card)#+calc_pairs(hand)+calc_flushes(hand)
+    calc_runs(hand, cut_card)#+calc_pairs(hand)+calc_flushes(hand)
     #return(total_score)
 
 def calc_15s(hand, cut_card):
@@ -53,7 +53,7 @@ def calc_15s(hand, cut_card):
     
     card_values = list(map(int, card_values))
     cut_card_value = cut_card[0][0]
-    print(cut_card_value)
+    #print(cut_card_value)
     if cut_card_value == '0' or cut_card_value == 'J' or cut_card_value == 'Q' or cut_card_value == 'K':
         cut_card_value = '10'
         
@@ -96,10 +96,29 @@ def calc_15s(hand, cut_card):
                         score_cut = score_cut + 2
     if card_values_cut[0] + card_values_cut[1] + card_values_cut[2] + card_values_cut[3] + card_values_cut[4]== 15:
         score_cut = score_cut + 2
-    print(card_values, score_no_cut, card_values_cut, score_cut)
+    #print(card_values, score_no_cut, card_values_cut, score_cut)
 
-#def calc_runs(hand, cut_card):
+def calc_runs(hand, cut_card):
+    card_values = [hand[0],hand[3],hand[6],hand[9]]
+    
+    #card_values = list(map(int, card_values))
+    
+    #print(card_values)
+    
+    cut_card_value = cut_card[0][0]
+    
+    card_values_cut = card_values.copy()
+    card_values_cut.append(cut_card_value)
+    
+    card_values = numpy.sort(card_values)
+    card_values_cut = numpy.sort(card_values_cut)
+    
+    print(card_values)
+    print(card_values_cut)
     #use regex here. Study.
+    #
+    #Use regex
+    
     #if sequence in hand:
     #    print(hand, True)
     #else:
