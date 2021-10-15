@@ -113,11 +113,15 @@ def calc_runs(hand, cut_card):
     card_values = numpy.sort(card_values)
     card_values_cut = numpy.sort(card_values_cut)
     
-    print(card_values)
-    print(card_values_cut)
+    card_values_string = card_values[0]+card_values[1]+card_values[2]+card_values[3]
+    card_values_cut_string = card_values_cut[0]+card_values_cut[1]+card_values_cut[2] + \
+        card_values_cut[3]+card_values_cut[4]
+    
+    print(card_values_string)
+    print(card_values_cut_string)
+    
     #use regex here. Study.
-    #
-    #Use regex
+    #for 5 card run, it is simple
     
     #if sequence in hand:
     #    print(hand, True)
