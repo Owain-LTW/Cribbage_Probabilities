@@ -60,7 +60,7 @@ def hand_possibilities(hand1, hand2, remaining_cards):
             possible_hands2 = numpy.append(possible_hands2, [dum_hand2], axis = 0)
             possible_cribs = numpy.append(possible_cribs, [crib], axis = 0)
             
-            print(dum_hand1)
+            #print(dum_hand1)
             print(possible_hands1)
             
     numpy.savetxt(file_path1, possible_hands1, fmt='%2s', delimiter = ',')
