@@ -67,7 +67,7 @@ def hand_possibilities(hand1, hand2, remaining_cards):
     numpy.savetxt(file_path2, possible_hands2, fmt='%2s', delimiter = ',')
     numpy.savetxt(file_path3, possible_cribs, fmt='%2s', delimiter = ',')
     
-    numpy.savetxt(file_path4, [remaining_cards], fmt='%2s', delimiter = ',')
+    numpy.savetxt(file_path4, remaining_cards, fmt='%2s', delimiter = ',')
     
 if __name__ == '__main__':
    main()
