@@ -64,13 +64,11 @@ def calc_15s(hand, cut_card):
     score_no_cut = 0
     for i in range(0,len(card_values)):
         for j in range(0,len(card_values)):
-            if j <= i:
-                continue
+            if j <= i: continue
             if card_values[i]+card_values[j]==15:
                 score_no_cut = score_no_cut + 2
             for k in range (0,len(card_values)):
-                if k <= j:
-                    continue
+                if k <= j: continue
                 if card_values[i]+card_values[j]+card_values[k] == 15:
                     score_no_cut = score_no_cut + 2
     if card_values[0] + card_values[1] + card_values[2] + card_values[3] == 15:
@@ -80,18 +78,15 @@ def calc_15s(hand, cut_card):
     score_cut = 0
     for i in range(0,len(card_values_cut)):
         for j in range(0,len(card_values_cut)):
-            if j <= i:
-                continue
+            if j <= i: continue
             if card_values_cut[i]+card_values_cut[j]==15:
                 score_cut = score_cut + 2
             for k in range (0,len(card_values_cut)):
-                if k <= j:
-                    continue
+                if k <= j: continue
                 if card_values_cut[i]+card_values_cut[j]+card_values_cut[k] == 15:
                     score_cut = score_cut + 2
                 for l in range (0,len(card_values_cut)):
-                    if l <= k:
-                        continue
+                    if l <= k: continue
                     if card_values_cut[i]+card_values_cut[j]+card_values_cut[k]+card_values_cut[l] == 15:
                         score_cut = score_cut + 2
     if card_values_cut[0] + card_values_cut[1] + card_values_cut[2] + card_values_cut[3] + card_values_cut[4]== 15:
@@ -99,13 +94,23 @@ def calc_15s(hand, cut_card):
     #print(card_values, score_no_cut, card_values_cut, score_cut)
 
 def calc_runs(hand, cut_card):
+    score = 0
+    
     card_values = [hand[0],hand[3],hand[6],hand[9]]
-    
-    #card_values = list(map(int, card_values))
-    
-    #print(card_values)
+    for i in range(0, len(card_values)):
+        if card_values[i] == '0': card_values[i] = '10'
+        if card_values[i] == 'J': card_values[i] = '11'
+        if card_values[i] == 'Q': card_values[i] = '12'
+        if card_values[i] == 'K': card_values[i] = '13'
+     
+    card_values = list(map(int, card_values))
     
     cut_card_value = cut_card[0][0]
+    
+    if cut_card_value == '0': cut_card_value = 10
+    if cut_card_value == 'J': cut_card_value = 11
+    if cut_card_value == 'Q': cut_card_value = 12
+    if cut_card_value == 'K': cut_card_value = 13
     
     card_values_cut = card_values.copy()
     card_values_cut.append(cut_card_value)
@@ -113,16 +118,20 @@ def calc_runs(hand, cut_card):
     card_values = numpy.sort(card_values)
     card_values_cut = numpy.sort(card_values_cut)
     
-    print(card_values)
-    print(card_values_cut)
-    #use regex here. Study.
-    #
-    #Use regex
+    #Calculate without cut card first
+    #4 card run
+    if card_values[3]-card_values[2] == 1 and card_values[2]-card_values[1] == 1 and card_values[1]-card_values[0] == 1:
+        score = score + 4
     
-    #if sequence in hand:
-    #    print(hand, True)
-    #else:
-    #    print(hand, False)
+    #3 card run
+    for i in range(len(card_values)):
+        for j in range(len(card_values)):
+            for k in range(len(card_values)):
+                if k <= j <= i: continue
+                if card_values[k]-card_values[j] == 1 and card_values[j]-card_values[i] == 1:
+                    score = score + 3
+    
+    print(card_values, score, card_values_cut)    
 
 if __name__ == '__main__':
    main()
