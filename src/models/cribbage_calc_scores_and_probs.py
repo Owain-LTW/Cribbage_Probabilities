@@ -35,8 +35,8 @@ def main():
         calculate_score(hand1_possibilities[hand], cut_card)
 
 def calculate_score(hand, cut_card):
-    calc_15s(hand, cut_card)
-    calc_runs(hand, cut_card)#+calc_pairs(hand)+calc_flushes(hand)
+    score = calc_15s(hand, cut_card) + calc_runs(hand, cut_card)#+calc_pairs(hand)+calc_flushes(hand)
+    print(hand, cut_card, score)
     #return(total_score)
 
 def calc_15s(hand, cut_card):
@@ -92,7 +92,8 @@ def calc_15s(hand, cut_card):
     if card_values_cut[0] + card_values_cut[1] + card_values_cut[2] + card_values_cut[3] + card_values_cut[4]== 15:
         score_cut = score_cut + 2
     #print(card_values, score_no_cut, card_values_cut, score_cut)
-
+    return(score_cut)
+    
 def calc_runs(hand, cut_card):
     score = 0
     
@@ -104,34 +105,65 @@ def calc_runs(hand, cut_card):
         if card_values[i] == 'K': card_values[i] = '13'
      
     card_values = list(map(int, card_values))
+
     
     cut_card_value = cut_card[0][0]
     
-    if cut_card_value == '0': cut_card_value = 10
-    if cut_card_value == 'J': cut_card_value = 11
-    if cut_card_value == 'Q': cut_card_value = 12
-    if cut_card_value == 'K': cut_card_value = 13
+    if cut_card_value == '0': cut_card_value = '10'
+    if cut_card_value == 'J': cut_card_value = '11'
+    if cut_card_value == 'Q': cut_card_value = '12'
+    if cut_card_value == 'K': cut_card_value = '13'
     
     card_values_cut = card_values.copy()
     card_values_cut.append(cut_card_value)
     
     card_values = numpy.sort(card_values)
-    card_values_cut = numpy.sort(card_values_cut)
+    
+    card_values_cut = list(map(int, card_values_cut))
+    card_values_cut = numpy.sort(card_values_cut)    
     
     #Calculate without cut card first
     #4 card run
     if card_values[3]-card_values[2] == 1 and card_values[2]-card_values[1] == 1 and card_values[1]-card_values[0] == 1:
         score = score + 4
-    
+    else:
     #3 card run
-    for i in range(len(card_values)):
-        for j in range(len(card_values)):
-            for k in range(len(card_values)):
-                if k <= j <= i: continue
-                if card_values[k]-card_values[j] == 1 and card_values[j]-card_values[i] == 1:
-                    score = score + 3
+        for i in range(len(card_values)):
+            for j in range(len(card_values)):
+                for k in range(len(card_values)):
+                    if k <= j <= i: continue
+                    if card_values[k]-card_values[j] == 1 and card_values[j]-card_values[i] == 1:
+                        score = score + 3
+    score_cut = 0
+    #Calculate with cut card
+    #5 card run
+    if card_values_cut[4]-card_values_cut[3] == 1 and card_values_cut[3]-card_values_cut[2] == 1 and \
+        card_values_cut[2]-card_values_cut[1] == 1 and card_values_cut[1]-card_values_cut[0] == 1:
+        score_cut = score_cut + 5
+    else:
+    #4 card run
+        for i in range(len(card_values_cut)):
+            for j in range(len(card_values_cut)):
+                for k in range(len(card_values_cut)):
+                    for l in range(len(card_values_cut)):
+                        if l <= k <= j <= i: continue
+                        if card_values_cut[l]-card_values_cut[k] == 1 and \
+                            card_values_cut[k]-card_values_cut[j] == 1 and \
+                            card_values_cut[j]-card_values_cut[i] == 1:
+                            score_cut = score_cut + 4
+    #3 card run
+    if score_cut == 0:
+        for i in range(len(card_values_cut)):
+            for j in range(len(card_values_cut)):
+                for k in range(len(card_values_cut)):
+                    if k <= j <= i: continue
+                    if card_values_cut[k]-card_values_cut[j] == 1 and \
+                        card_values_cut[j]-card_values_cut[i] == 1:
+                        score_cut = score_cut + 3
     
-    print(card_values, score, card_values_cut)    
+    #print(card_values, score, card_values_cut, score_cut)    
+    
+    return(score_cut)
 
 if __name__ == '__main__':
    main()
