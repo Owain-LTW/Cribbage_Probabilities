@@ -35,7 +35,7 @@ def main():
         calculate_score(hand1_possibilities[hand], cut_card)
 
 def calculate_score(hand, cut_card):
-    score = calc_15s(hand, cut_card) + calc_runs(hand, cut_card)#+calc_pairs(hand)+calc_flushes(hand)
+    score = calc_15s(hand, cut_card) + calc_runs(hand, cut_card) + calc_pairs(hand, cut_card) + calc_flushes(hand, cut_card) + calc_nibs(hand, cut_card)
     print(hand, cut_card, score)
     #return(total_score)
 
@@ -165,14 +165,61 @@ def calc_runs(hand, cut_card):
     
     return(score_cut)
 
+def calc_pairs(hand, cut_card):
+   #calculate without cut card
+    score = 0
+    card_values = [hand[0],hand[3],hand[6],hand[9]]
+    for i in range(len(card_values)):
+        for j in range(len(card_values)):
+            if j <= i: continue
+            if card_values[i] == card_values[j]:
+                    score = score + 2
+    #calculate with cut card
+    score_cut = 0
+    cut_card_value = cut_card[0][0]
+    card_values_cut = card_values.copy()
+    card_values_cut.append(cut_card_value)
+
+    for i in range(len(card_values_cut)):
+        for j in range(len(card_values_cut)):
+            if j <= i: continue
+            if card_values_cut[i] == card_values_cut[j]:
+                    score_cut = score_cut + 2
+
+   # print(card_values_cut,score_cut)
+    return(score_cut)
+
+def calc_flushes(hand, cut_card):
+    #without cut card
+    score = 0
+    card_suits = [hand[1],hand[4],hand[7],hand[10]]
+    if card_suits[0] == card_suits[1] == card_suits[2] == card_suits[3]:
+        score = score + 4
+
+    #with cut card
+    score_cut = 0
+    cut_card_suit = cut_card[0][1]
+    card_suits_cut = card_suits.copy()
+    card_suits_cut.append(cut_card_suit)
+    if card_suits_cut[0] == card_suits_cut[1] == card_suits_cut[2] == card_suits_cut[3] == card_suits_cut[4]:
+        score_cut = score_cut + 5
+    return(score_cut)
+
+def calc_nibs(hand, cut_card):
+    score = 0
+    card_suits = [hand[1],hand[4],hand[7],hand[10]]
+    card_values = [hand[0],hand[3],hand[6],hand[9]]
+    cut_card_suit = cut_card[0][1]
+    
+    for i in range(len(card_values)):
+        if card_values[i] == 'J' and cut_card_suit == card_suits[i]:
+            score = score + 1
+    
+    return(score)
+
 if __name__ == '__main__':
    main()
     
-#def calc_pairs:
-    
-#def calc_flushes:
-    
- 
 #Read in all files DONE
 
 #Create an array (look up .dat files)
